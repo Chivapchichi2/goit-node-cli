@@ -1,7 +1,8 @@
-import fs from 'fs/promises';
-import { v4 as uuidv4 } from 'uuid';
+import fs from "fs/promises";
+import { v4 as uuidv4 } from "uuid";
+import path from "path";
 
-const contactsPath = './db/contacts.json';
+const contactsPath = path.resolve("db", "contacts.json");
 
 async function listContacts() {
   try {
