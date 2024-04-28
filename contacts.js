@@ -18,6 +18,7 @@ async function getContactById(contactId) {
     const contacts = await readContacts();
     const contact = contacts.find(({ id }) => id === contactId);
     if (!contact) {
+      console.log(null);
       return null;
     }
     console.log(contact);
@@ -33,6 +34,7 @@ async function removeContact(contactId) {
     const contacts = await readContacts();
     const index = contacts.findIndex(({ id }) => id === contactId);
     if (index === -1) {
+      console.log(null);
       return null;
     }
     const removedContact = contacts.splice(index, 1)[0];
