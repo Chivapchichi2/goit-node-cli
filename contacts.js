@@ -6,10 +6,10 @@ const contactsPath = path.resolve("db", "contacts.json");
 
 async function listContacts() {
   try {
-    const contacts = await readContacts();
-    console.table(contacts);
+    return await readContacts();
   } catch (error) {
     console.error(error.message);
+    return null;
   }
 }
 
@@ -18,10 +18,8 @@ async function getContactById(contactId) {
     const contacts = await readContacts();
     const contact = contacts.find(({ id }) => id === contactId);
     if (!contact) {
-      console.log(null);
       return null;
     }
-    console.log(contact);
     return contact;
   } catch (error) {
     console.error(error.message);
@@ -34,12 +32,10 @@ async function removeContact(contactId) {
     const contacts = await readContacts();
     const index = contacts.findIndex(({ id }) => id === contactId);
     if (index === -1) {
-      console.log(null);
       return null;
     }
     const removedContact = contacts.splice(index, 1)[0];
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    console.log(removedContact);
     return removedContact;
   } catch (error) {
     console.error(error.message);
@@ -53,7 +49,6 @@ async function addContact(name, email, phone) {
     const newContact = { id: uuidv4(), name, email, phone };
     contacts.push(newContact);
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    console.log(newContact);
     return newContact;
   } catch (error) {
     console.error(error.message);
